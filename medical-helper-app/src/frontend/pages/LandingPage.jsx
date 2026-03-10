@@ -1,35 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Activity, Scan, Heart, Languages, Bell, Volume2, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import toast from 'react-hot-toast';
 
 export default function LandingPage() {
-  const { currentUser, login, signup } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  // Auto-login logic for abc@gmail.com
-  useEffect(() => {
-    const attemptAutoLogin = async () => {
-      // Only attempt auto login if no user is signed in
-      if (!currentUser) {
-        try {
-          await login('abc@gmail.com', '123456');
-          toast.success('Auto-logged in as Demo User (abc@gmail.com)');
-        } catch (error) {
-          // If login fails (user might not exist), create it
-          try {
-            await signup('abc@gmail.com', '123456', 'Demo User');
-            toast.success('Auto-created & logged in Demo User');
-          } catch (signupError) {
-            console.error('Auto login failed:', signupError);
-            toast.error('Could not auto-login');
-          }
-        }
-      }
-    };
-    attemptAutoLogin();
-  }, [currentUser, login, signup]);
+
 
   return (
     <div className="min-h-screen bg-glow-effect text-[var(--text-primary)]">
@@ -79,8 +57,10 @@ export default function LandingPage() {
             Access Your MedAssist <ArrowRight className="group-hover:translate-x-1 transition-transform w-5 h-5" />
           </button>
         ) : (
-          <div className="text-[var(--text-secondary)] text-sm animate-pulse-slow">
-            Connecting securely...
+          <div className="flex gap-4">
+            <Link to="/signup" className="group btn-premium text-lg py-4 px-10 shadow-xl shadow-brand/30 hover:scale-105 flex items-center gap-3 font-bold">
+              Get Started <ArrowRight className="group-hover:translate-x-1 transition-transform w-5 h-5" />
+            </Link>
           </div>
         )}
       </div>
