@@ -103,4 +103,4 @@ exports.verifyToken = async (req, res, next) => {
   } catch (error) {
     res.status(401).json({ valid: false, message: 'Invalid token' });
   }
-};
+};  

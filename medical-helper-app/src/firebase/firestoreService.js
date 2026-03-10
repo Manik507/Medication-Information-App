@@ -102,6 +102,13 @@ export async function getUserReminders(userId) {
   });
 }
 
+export async function updateReminder(reminderId, data) {
+  await updateDoc(doc(db, 'reminders', reminderId), { 
+    ...data, 
+    updatedAt: serverTimestamp() 
+  });
+}
+
 export async function deleteReminder(reminderId) {
   await deleteDoc(doc(db, 'reminders', reminderId));
 }
@@ -115,6 +122,10 @@ export async function addHistory(userId, data) {
     status: data.status || 'taken',   // 'taken' | 'missed'
     takenAt: serverTimestamp(),
   });
+}
+
+export async function updateHistory(historyId, data) {
+  await updateDoc(doc(db, 'history', historyId), { ...data });
 }
 
 export async function getUserHistory(userId) {
@@ -136,6 +147,22 @@ export async function getAllActivityLogs() {
   const q = query(collection(db, 'activity_logs'), orderBy('timestamp', 'desc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// ─── EMAIL NOTIFICATIONS (Trigger Email Extension) ────────────────────────────
+export async function sendEmailNotification(email, reminder) {
+  try {
+    await addDoc(collection(db, 'mail'), {
+      to: email,
+      message: {
+        subject: `Medication Reminder: ${reminder.medicineName}`,
+        text: `Hello,\n\It's time to take your medicine: ${reminder.medicineName} ${reminder.dosage ? `(${reminder.dosage})` : ''}.\n\nPlease mark it as taken in the MediHelper app.`,
+        html: `<h3>Medication Reminder</h3><p>Hello,</p><p>It's time to take your medicine: <strong>${reminder.medicineName}</strong> ${reminder.dosage ? `(${reminder.dosage})` : ''}.</p><p>Please mark it as taken in the MediHelper app. Stay healthy!</p>`
+      }
+    });
+  } catch (err) {
+    console.warn('Failed to trigger email log:', err);
+  }
 }
 
 // ─── ADMIN: ALL USERS ─────────────────────────────────────────────────────────

@@ -7,6 +7,15 @@ import toast from 'react-hot-toast';
 
 const frequencies = ['Once daily', 'Twice daily', 'Three times daily', 'Every 4 hours', 'Weekly', 'As needed'];
 
+const Field = ({ label, children, required }) => (
+  <div className="relative group">
+    <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2 ml-1">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
+    {children}
+  </div>
+);
+
 export default function AddReminder() {
   const { currentUser } = useAuth();
   const [form, setForm] = useState({
@@ -36,15 +45,6 @@ export default function AddReminder() {
       setLoading(false);
     }
   }
-
-  const Field = ({ label, children, required }) => (
-    <div className="relative group">
-      <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2 ml-1">
-        {label} {required && <span className="text-red-500">*</span>}
-      </label>
-      {children}
-    </div>
-  );
 
   return (
     <div className="max-w-2xl mx-auto space-y-8 animate-fade-in pb-12">

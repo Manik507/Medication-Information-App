@@ -24,6 +24,9 @@ import AdminDashboard from './pages/AdminDashboard';
 // Protected Route Component
 import ProtectedRoute from './components/ProtectedRoute';
 
+// Background Notification Watcher
+import NotificationManager from './components/NotificationManager';
+
 // Admin-only route guard
 function AdminRoute({ children }) {
   const { isAdmin } = useAuth();
@@ -43,6 +46,8 @@ function App() {
                 style: { background: 'var(--glass-bg)', color: 'var(--text-primary)', backdropFilter: 'blur(12px)', border: '1px solid var(--glass-border)' },
               }}
             />
+            
+            <NotificationManager />
 
             <Routes>
               {/* Public Routes */}
