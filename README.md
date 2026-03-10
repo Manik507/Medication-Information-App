@@ -1,16 +1,118 @@
-# React + Vite
+# Medical Helper App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive web application designed to help users interact with their medication. Featuring barcode scanning/uploading for retrieving medication details, multi-language support (English, Hindi, Marathi), and a Voice Assistant that can read out medication instructions. It also includes an extensive Admin Dashboard for managing the catalog of medicines securely.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Barcode Scanning & Uploading**: Quickly scan or upload medicine barcodes to view detailed information, including ingredients, use cases, and side effects.
+- **Multilingual Support**: Supports displaying medication details in English, Hindi, and Marathi, catering to diverse users.
+- **Voice Assistant**: Integrated text-to-speech voice assistant to read medicine details aloud, particularly useful for elderly or visually impaired users.
+- **Admin Dashboard**: Comprehensive admin panel with secure access for managing medicines (Add, Edit, View, Delete). Only authorized admins can manage the database.
+- **Reminder & Notifications**: Users can set up pill reminders and receive automated notifications along with dynamically generated barcodes.
+- **Font Size Adjustment**: Adjustable UI text size for improved accessibility to aid elderly users.
+- **Authentication**: Secure login and signup with personalized profiles using Firebase Authentication.
 
-## React Compiler
+## Folder Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+src/
+├── main.jsx                 # Entry point
+├── App.css
+├── index.css
+│
+├── backend/                 # Backend Node.js Scripts & Controllers
+│   ├── server.js
+│   ├── controller/
+│   ├── middleware/
+│   └── routes/
+│
+├── firebase/                # Firebase Configurations & Services
+│   ├── firebase-admin.js
+│   ├── firebase-config.js
+│   └── firestoreService.js
+│
+└── frontend/                # Main React Frontend
+    ├── App.jsx              # Main React App Route Component
+    ├── components/          # Reusable UI Components
+    │   ├── BarcodeDisplay.jsx
+    │   ├── FontSizeAdjuster.jsx
+    │   ├── NotificationBell.jsx
+    │   ├── NotificationManager.jsx
+    │   ├── ProtectedRoute.jsx
+    │   └── VoiceAssistant.jsx
+    ├── context/             # React Context Providers
+    │   ├── AuthContext.jsx
+    │   ├── FontSizeContext.jsx
+    │   ├── LanguageContext.jsx
+    │   └── ThemeContext.jsx
+    ├── layouts/
+    │   └── MainLayout.jsx
+    └── pages/               # Application Pages
+        ├── AddReminder.jsx
+        ├── AdminDashboard.jsx
+        ├── Dashboard.jsx
+        ├── HistoryPage.jsx
+        ├── LandingPage.jsx
+        ├── LoginPage.jsx
+        ├── MedicineDetail.jsx
+        ├── ProfilePage.jsx
+        ├── RemindersPage.jsx
+        ├── ScannerPage.jsx
+        ├── SearchMedicine.jsx
+        ├── SettingsPage.jsx
+        └── SignupPage.jsx
+```
 
-## Expanding the ESLint configuration
+## Output & Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*(Include screenshots of the Application Dashboard, Landing Page, Scanner Page, and Admin Panel here to showcase the rich UI)*
+
+## Technologies Used
+
+- **Frontend**: React 19, Vite, Tailwind CSS, React Router DOM, Lucide React icons
+- **Backend & Database**: Firebase (Firestore, Authentication, Admin SDK)
+- **Scanning & Barcodes**: `html5-qrcode` for scanning, `jsbarcode` for generating barcodes
+- **Notifications**: `react-hot-toast` for toast notifications
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- Firebase Account with a configured Project
+
+### Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd CHK-1772384084305-6082/medical-helper-app
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+4. **Environment Variables:**
+   Create a `.env` file in the `medical-helper-app` root directory and add your Firebase credentials:
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   ```
+
+5. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests to contribute to the UI or integrate new features!
