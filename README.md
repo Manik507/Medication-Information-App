@@ -65,7 +65,8 @@ src/
 
 ## Output & Screenshots
 
-*(Include screenshots of the Application Dashboard, Landing Page, Scanner Page, and Admin Panel here to showcase the rich UI)*
+<img width="1898" height="889" alt="Screenshot 2026-03-11 022306" src="https://github.com/user-attachments/assets/c494e6c9-90a2-455b-8088-f8f9c0759357" />
+
 
 ## Technologies Used
 
